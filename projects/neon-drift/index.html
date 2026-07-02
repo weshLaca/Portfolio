@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Neon Drift | Progetto di Angelo Lacatena</title>
+    <meta
+      name="description"
+      content="Neon Drift: mini-gioco arcade browser con movimento fluido, ostacoli, combo e suoni sintetici. Progetto di Angelo Lacatena."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="back-pill" href="../../index.html">&larr; Portfolio di Angelo</a>
+    <main class="game-shell" aria-label="Neon Drift">
+      <canvas id="game" aria-label="Area di gioco Neon Drift"></canvas>
+
+      <header class="hud" aria-label="Statistiche di gioco">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Neon Drift</span>
+        </div>
+
+        <div class="stats" aria-live="polite">
+          <div>
+            <span>Score</span>
+            <strong id="score">0</strong>
+          </div>
+          <div>
+            <span>Level</span>
+            <strong id="level">1</strong>
+          </div>
+          <div>
+            <span>Lives</span>
+            <strong id="lives">3</strong>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button id="muteButton" type="button" aria-pressed="false" title="Audio">Audio</button>
+          <button id="pauseButton" type="button" title="Pausa">Pausa</button>
+        </div>
+      </header>
+
+      <section class="energy-wrap" aria-label="Energia phase">
+        <span>Phase</span>
+        <div class="energy-track"><i id="energyBar"></i></div>
+      </section>
+
+      <section class="screen is-visible" id="introScreen" aria-labelledby="introTitle">
+        <p class="eyebrow">Arcade sprint</p>
+        <h1 id="introTitle">Neon Drift</h1>
+        <p>
+          Pilota la scia, taglia tra gli ostacoli e usa Phase quando lo spazio
+          si chiude. Raccogli i core verdi per tenere viva la corsa.
+        </p>
+        <div class="screen-actions">
+          <button class="primary" id="startButton" type="button">Start run</button>
+          <span>WASD / frecce / touch</span>
+        </div>
+      </section>
+
+      <section class="screen" id="endScreen" aria-labelledby="endTitle">
+        <p class="eyebrow">Run chiusa</p>
+        <h2 id="endTitle">Bel drift.</h2>
+        <p id="endCopy">Score finale: 0</p>
+        <div class="screen-actions">
+          <button class="primary" id="retryButton" type="button">Rigioca</button>
+          <span>Spazio = Phase</span>
+        </div>
+      </section>
+
+      <footer class="help-bar">
+        <span>Muovi</span>
+        <kbd>WASD</kbd>
+        <kbd>Frecce</kbd>
+        <span>Phase</span>
+        <kbd>Spazio</kbd>
+        <span>Touch: trascina</span>
+      </footer>
+    </main>
+
+    <script src="game.js"></script>
+  </body>
+</html>
