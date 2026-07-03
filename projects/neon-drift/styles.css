@@ -9,6 +9,7 @@
   --ember: #f0573f;
   --gold: #ffb23a;
   --cobalt: #4f74ff;
+  --purple: #7d4dff;
   --radius: 8px;
 }
 
@@ -228,9 +229,11 @@ canvas {
 .screen {
   position: absolute;
   left: clamp(16px, 7vw, 92px);
-  bottom: clamp(118px, 15vh, 170px);
+  top: clamp(84px, 13vh, 120px);
+  bottom: clamp(78px, 11vh, 100px);
   z-index: 4;
-  width: min(520px, calc(100vw - 32px));
+  width: min(560px, calc(100vw - 32px));
+  overflow-y: auto;
   padding: clamp(20px, 4vw, 34px);
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: var(--radius);
@@ -360,7 +363,8 @@ kbd {
   }
 
   .screen {
-    bottom: 126px;
+    top: 132px;
+    bottom: 96px;
   }
 
   h1 {
@@ -411,4 +415,514 @@ kbd {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
+}
+
+/* ---------------- combo cell (reuses .stats div base styles) ---------------- */
+
+.combo-cell strong {
+  color: var(--gold);
+}
+
+/* ---------------- mode toggles ---------------- */
+
+.mode-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.screen .mode-btn {
+  padding: 9px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 0.88rem;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.mode-btn:hover,
+.mode-btn:focus-visible {
+  transform: translateY(-2px);
+}
+
+.mode-btn.is-active {
+  border-color: var(--ember);
+  background: rgba(240, 87, 63, 0.18);
+}
+
+#stormToggle.is-active {
+  border-color: var(--cobalt);
+  background: rgba(79, 116, 255, 0.18);
+}
+
+/* ---------------- skin strip ---------------- */
+
+.skin-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.screen .skin-swatch {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 11px 7px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 800;
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+.skin-swatch:hover,
+.skin-swatch:focus-visible {
+  transform: translateY(-2px);
+}
+
+.skin-swatch.is-selected {
+  border-color: var(--lime);
+}
+
+.skin-swatch.is-locked {
+  opacity: 0.55;
+}
+
+.swatch-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* ---------------- menu links ---------------- */
+
+.menu-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.menu-links button {
+  padding: 9px 13px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 0.82rem;
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+.menu-links button:hover,
+.menu-links button:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(216, 243, 94, 0.55);
+}
+
+.stars-pill {
+  margin-left: 4px;
+  color: var(--gold);
+}
+
+/* ---------------- challenge banner ---------------- */
+
+.challenge-banner {
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  border: 1px dashed var(--gold);
+  border-radius: var(--radius);
+  background: rgba(255, 178, 58, 0.1);
+  font-weight: 800;
+  font-size: 0.92rem !important;
+  color: var(--text) !important;
+}
+
+/* ---------------- event banner ---------------- */
+
+.event-banner {
+  position: absolute;
+  top: 96px;
+  left: 50%;
+  z-index: 7;
+  transform: translate(-50%, -14px);
+  padding: 10px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(9, 10, 10, 0.8);
+  backdrop-filter: blur(18px);
+  font-weight: 900;
+  font-size: 0.95rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+.event-banner.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---------------- end screen extras ---------------- */
+
+.end-rank {
+  padding: 9px 12px;
+  margin-top: -6px;
+  margin-bottom: 14px;
+  border-radius: var(--radius);
+  background: rgba(216, 243, 94, 0.12);
+  color: var(--lime) !important;
+  font-weight: 800 !important;
+  font-size: 0.9rem !important;
+}
+
+.end-missions {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 8px;
+  padding: 0;
+  list-style: none;
+  font-size: 0.86rem;
+  color: rgba(244, 242, 232, 0.7);
+}
+
+.end-missions li.is-done {
+  color: var(--lime);
+}
+
+.end-hint {
+  display: block;
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.screen .ghost {
+  color: var(--text);
+  background: transparent;
+  border-color: var(--line);
+}
+
+.screen .ghost:hover,
+.screen .ghost:focus-visible {
+  border-color: var(--lime);
+}
+
+/* ---------------- panels (classifica / obiettivi / missioni) ---------------- */
+
+.panel-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(3, 3, 3, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.panel-backdrop[hidden] {
+  display: none;
+}
+
+.panel {
+  width: min(480px, 100%);
+  max-height: min(600px, 86vh);
+  overflow-y: auto;
+  padding: clamp(20px, 4vw, 30px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius);
+  background: #0d0e0d;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.5);
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.panel-head h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.panel-close {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.panel-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.panel-tab {
+  padding: 7px 13px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+
+.panel-tab.is-active {
+  border-color: var(--lime);
+  color: var(--lime);
+}
+
+.panel-note {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.board-list,
+.achv-list,
+.mission-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.board-list li {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.board-rank {
+  color: var(--gold);
+  font-weight: 900;
+}
+
+.board-score {
+  color: var(--lime);
+  font-weight: 900;
+}
+
+.board-empty {
+  color: var(--muted);
+  font-weight: 600;
+  text-align: center;
+  padding: 18px 0;
+}
+
+.achv-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.achv-list li.is-unlocked {
+  border-color: rgba(216, 243, 94, 0.4);
+  color: var(--text);
+}
+
+.achv-icon {
+  font-size: 1.3rem;
+}
+
+.mission-list li {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 0.86rem;
+}
+
+.mission-list li.is-done {
+  border-color: rgba(216, 243, 94, 0.4);
+}
+
+.mission-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.mission-bar {
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mission-bar i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--teal), var(--lime));
+}
+
+/* ---------------- toasts ---------------- */
+
+.toast-stack {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.toast {
+  padding: 11px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius);
+  background: rgba(9, 10, 10, 0.92);
+  backdrop-filter: blur(18px);
+  font-weight: 700;
+  font-size: 0.85rem;
+  max-width: 320px;
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ---------------- Neon Storm fx ---------------- */
+
+#game.fx-invert {
+  filter: invert(0.86) hue-rotate(180deg);
+}
+
+@media (max-width: 620px) {
+  .toast-stack {
+    left: 12px;
+    right: 12px;
+    top: 12px;
+  }
+
+  .toast {
+    max-width: none;
+  }
+
+  .event-banner {
+    top: 128px;
+    width: min(320px, calc(100vw - 40px));
+    text-align: center;
+    font-size: 0.82rem;
+  }
+}
+
+/* ---------------- ad slot ----------------
+   Inline dentro le schermate Start/Game Over: mai sopra al gioco,
+   mai sopra ai comandi. */
+
+.ad-inline {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--line);
+}
+
+.ad-label {
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 620px) {
+  .ad-inline ins {
+    width: 260px !important;
+  }
+}
+
+/* ---------------- premium skin panel ---------------- */
+
+.premium-copy {
+  margin: 0 0 16px;
+  color: rgba(244, 242, 232, 0.78);
+  font-size: 0.94rem;
+}
+
+.premium-buy {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, #ffe9b0, #ffcf4d);
+  color: #241a04;
+  text-align: center;
+  font-weight: 900;
+  text-decoration: none;
+  margin-bottom: 16px;
+}
+
+.premium-redeem {
+  display: flex;
+  gap: 8px;
+}
+
+.premium-redeem input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.premium-redeem button {
+  padding: 10px 16px;
+  border: 1px solid var(--lime);
+  border-radius: var(--radius);
+  background: rgba(216, 243, 94, 0.14);
+  color: var(--lime);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.premium-redeem button:hover,
+.premium-redeem button:focus-visible {
+  background: rgba(216, 243, 94, 0.24);
 }
